@@ -22,8 +22,5 @@ public class FinancialEntryService {
         return financialEntryRepository.findAll();
     }
 
-    public List<FinancialEntry> findEntriesByDateRange(LocalDate startDate, LocalDate endDate) {
-        return financialEntryRepository.findAllByDateRange(startDate, endDate);
-    }
 
 }

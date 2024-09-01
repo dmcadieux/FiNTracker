@@ -19,7 +19,14 @@ public class FinancialEntry {
     @Column(name = "transactionlabel")
     private String transactionLabel;
 
-    @Column(name = "balanceChange")
+    public String getTransactionCategory() {
+        return transactionCategory;
+    }
+
+    @Column(name = "transactioncategory")
+    private String transactionCategory;
+
+    @Column(name = "balancechange")
     private Float balanceChange;
 
     @Column(name = "date")
@@ -28,19 +35,16 @@ public class FinancialEntry {
     public FinancialEntry() {
     }
 
-    public FinancialEntry(String bank, String transactionLabel, Float balanceChange, LocalDate date) {
+    public FinancialEntry(String bank, String transactionLabel, String transactionCategory, Float balanceChange, LocalDate date) {
         this.bank = bank;
         this.transactionLabel = transactionLabel;
+        this.transactionCategory = transactionCategory;
         this.balanceChange = balanceChange;
         this.date = date;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getBank() {
@@ -59,6 +63,10 @@ public class FinancialEntry {
         this.transactionLabel = transactionLabel;
     }
 
+    public void setTransactionCategory(String transactionCategory) {
+        this.transactionCategory = transactionCategory;
+    }
+
     public Float getBalanceChange() {
         return balanceChange;
     }
@@ -73,5 +81,17 @@ public class FinancialEntry {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "FinancialEntry{" +
+                "id=" + id +
+                ", bank='" + bank + '\'' +
+                ", transactionLabel='" + transactionLabel + '\'' +
+                ", transactionCategory='" + transactionCategory + '\'' +
+                ", balanceChange=" + balanceChange +
+                ", date=" + date +
+                '}';
     }
 }
