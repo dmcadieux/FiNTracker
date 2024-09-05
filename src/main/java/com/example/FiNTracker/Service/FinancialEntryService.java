@@ -22,5 +22,13 @@ public class FinancialEntryService {
         return financialEntryRepository.findAll();
     }
 
+    public List<FinancialEntry> findAllFinancialEntriesBetweenDates(LocalDate startDate, LocalDate endDate) {
+        return financialEntryRepository.findByDateBetween(startDate, endDate);
+    }
+
+    public List<FinancialEntry> findAllEntiresByCategory(String category) {
+        return financialEntryRepository.findAllByTransactionCategory(category);
+    }
+
 
 }

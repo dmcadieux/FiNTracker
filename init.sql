@@ -12,5 +12,5 @@ CREATE TABLE financialentries(
 INSERT INTO financialentries (bank, transactionlabel, transactioncategory, balancechange, date)
 VALUES
 	('Scotiabank', 'rent', 'rent', 2020.20, '2024-01-01'),
-	('TD', 'LCBO', 'booze', 120.1, '2024-01-02')
+	('TD', 'LCBO', 'booze', 120.1, '2024-01-05')
 ;

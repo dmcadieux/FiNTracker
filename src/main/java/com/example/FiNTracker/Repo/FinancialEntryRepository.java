@@ -10,4 +10,8 @@ public interface FinancialEntryRepository extends JpaRepository<FinancialEntry, 
 
     List<FinancialEntry> findAll();
 
+    List<FinancialEntry> findByDateBetween(LocalDate startDate, LocalDate endDate);
+
+    List<FinancialEntry> findAllByTransactionCategory(String transactionCategory);
+
 }
