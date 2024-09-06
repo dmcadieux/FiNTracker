@@ -1,7 +1,8 @@
 package com.example.FiNTracker.Controller;
 
-import com.example.FiNTracker.Entity.FinancialEntry;
-import com.example.FiNTracker.Service.FinancialEntryService;
+
+import com.example.FiNTracker.Entity.Transaction;
+import com.example.FiNTracker.Service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,32 +13,32 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-public class FinancialEntryController {
+public class TransactionController {
 
-    private final FinancialEntryService financialEntryService;
+    private final TransactionService transactionService;
 
     @Autowired
-    public FinancialEntryController(FinancialEntryService financialEntryService) {
-        this.financialEntryService = financialEntryService;
+    public TransactionController(TransactionService transactionService) {
+        this.transactionService = transactionService;
     }
 
     @GetMapping("/get")
-    public List<FinancialEntry> getAllFinancialEntries() {
-        return financialEntryService.findAllFinancialEntries();
+    public List<Transaction> getAllTransactions() {
+        return transactionService.findAllTransactions();
     }
 
     @GetMapping("/date-range")
-    public List<FinancialEntry> getAllFinancialEntriesBetweenDates(
+    public List<Transaction> getAllFinancialEntriesBetweenDates(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
     ) {
-        return financialEntryService.findAllFinancialEntriesBetweenDates(startDate, endDate);
+        return transactionService.findAllTransactionsBetweenDates(startDate, endDate);
     }
 
     @GetMapping("category")
-    public List<FinancialEntry> getAllEntriesByCategory(
+    public List<Transaction> getAllEntriesByCategory(
             @RequestParam String category
     ) {
-        return financialEntryService.findAllEntiresByCategory(category);
+        return transactionService.findAllTransactionsByCategory(category);
     }
 }
