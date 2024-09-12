@@ -13,6 +13,9 @@ public class Budget {
     @Column(name = "user_id")
     private Long user_id;
 
+    @Column(name = "account_id", nullable = false)
+    private Long account_id;
+
     @Column(name = "category")
     private String category;
 
@@ -25,7 +28,8 @@ public class Budget {
     public Budget() {
     }
 
-    public Budget(String category, Float budget_limit, LocalDate date) {
+    public Budget(Long account_id, String category, Float budget_limit, LocalDate date) {
+        this.account_id = account_id;
         this.category = category;
         this.budget_limit = budget_limit;
         this.date = date;
@@ -33,6 +37,14 @@ public class Budget {
 
     public Long getUser_id() {
         return user_id;
+    }
+
+    public Long getAccount_id() {
+        return account_id;
+    }
+
+    public void setAccount_id(Long account_id) {
+        this.account_id = account_id;
     }
 
     public String getCategory() {
@@ -63,6 +75,7 @@ public class Budget {
     public String toString() {
         return "Budget{" +
                 "user_id=" + user_id +
+                ", account_id=" + account_id +
                 ", category='" + category + '\'' +
                 ", budget_limit=" + budget_limit +
                 ", date=" + date +
