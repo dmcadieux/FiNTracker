@@ -23,4 +23,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     Transaction findByTransactionID(Long transactionID);
 
     // TODO Write queries to join au.user_id to t.user_id for various purposes
+
+    //TODO Write query to return all transactions by month
 }

@@ -30,5 +30,9 @@ public class TransactionService {
         return transactionRepository.findAllByCategory(category);
     }
 
+    public List<Transaction> findAllByAmountBetween(Float amount1, Float amount2) {
+        return transactionRepository.findAllByAmountBetween(amount1, amount2);
+    }
+
 
 }
