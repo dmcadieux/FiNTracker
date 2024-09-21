@@ -18,8 +18,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     List<Transaction> findAllByTransactionName(String transactionName);
 
-    List<Transaction> findAllByUserId(Long userID);
-
     Transaction findByTransactionID(Long transactionID);
 
     // TODO Write queries to join au.user_id to t.user_id for various purposes

@@ -34,5 +34,13 @@ public class TransactionService {
         return transactionRepository.findAllByAmountBetween(amount1, amount2);
     }
 
+    public List<Transaction> findAllByTransactionName(String transactionName) {
+        return transactionRepository.findAllByTransactionName(transactionName);
+    }
+
+    public Transaction findByTransactionID(Long transactionID) {
+        return transactionRepository.findByTransactionID(transactionID);
+    }
+
 
 }

@@ -13,9 +13,6 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long transaction_id;
 
-    @Column(name = "user_id")
-    private Long user_id;
-
     @Column(name = "category")
     private String category;
 
@@ -31,8 +28,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(Long user_id, String category, String transaction_name, Float amount, LocalDate date) {
-        this.user_id = user_id;
+    public Transaction(String category, String transaction_name, Float amount, LocalDate date) {
         this.category = category;
         this.transaction_name = transaction_name;
         this.amount = amount;
@@ -41,14 +37,6 @@ public class Transaction {
 
     public Long getTransaction_id() {
         return transaction_id;
-    }
-
-    public Long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
     }
 
     public String getCategory() {
@@ -87,7 +75,6 @@ public class Transaction {
     public String toString() {
         return "Transaction{" +
                 "transaction_id=" + transaction_id +
-                ", user_id=" + user_id +
                 ", category='" + category + '\'' +
                 ", transaction_name='" + transaction_name + '\'' +
                 ", amount=" + amount +
