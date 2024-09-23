@@ -3,6 +3,10 @@ package com.example.FiNTracker.Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "accounts")
@@ -22,13 +26,21 @@ public class Account {
     @Column(name = "created", nullable = false)
     private LocalDate created;
 
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AuthorizedUser> authorizedUsers = new HashSet<>();
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transaction> transactions = new ArrayList<>();
+
     public Account() {
     }
 
-    public Account(String account_name, Long owner_id, LocalDate created) {
+    public Account(String account_name, Long owner_id, LocalDate created, Set<AuthorizedUser> authorizedUsers, List<Transaction> transactions) {
         this.account_name = account_name;
         this.owner_id = owner_id;
         this.created = created;
+        this.authorizedUsers = authorizedUsers;
+        this.transactions = transactions;
     }
 
     public Long getAccount_id() {
@@ -59,6 +71,22 @@ public class Account {
         this.created = created;
     }
 
+    public Set<AuthorizedUser> getAuthorizedUsers() {
+        return authorizedUsers;
+    }
+
+    public void setAuthorizedUsers(Set<AuthorizedUser> authorizedUsers) {
+        this.authorizedUsers = authorizedUsers;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -66,6 +94,8 @@ public class Account {
                 ", account_name='" + account_name + '\'' +
                 ", owner_id=" + owner_id +
                 ", created=" + created +
+                ", authorizedUsers=" + authorizedUsers +
+                ", transactions=" + transactions +
                 '}';
     }
 }

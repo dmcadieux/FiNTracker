@@ -3,6 +3,8 @@ package com.example.FiNTracker.Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -25,18 +27,18 @@ public class User {
     @Column(name = "created", nullable = false)
     private LocalDate created;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private AuthorizedUser authorizedUser;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AuthorizedUser> authorizedUsers = new HashSet<>();
 
     public User() {
     }
 
-    public User(String username, String email, String password_hash, LocalDate created, AuthorizedUser authorizedUser) {
+    public User(String username, String email, String password_hash, LocalDate created, Set<AuthorizedUser> authorizedUsers) {
         this.username = username;
         this.email = email;
         this.password_hash = password_hash;
         this.created = created;
-        this.authorizedUser = authorizedUser;
+        this.authorizedUsers = authorizedUsers;
     }
 
     public Long getUser_id() {
@@ -75,11 +77,23 @@ public class User {
         this.created = created;
     }
 
-    public AuthorizedUser getAuthorizedUser() {
-        return authorizedUser;
+    public Set<AuthorizedUser> getAuthorizedUsers() {
+        return authorizedUsers;
     }
 
-    public void setAuthorizedUser(AuthorizedUser authorizedUser) {
-        this.authorizedUser = authorizedUser;
+    public void setAuthorizedUsers(Set<AuthorizedUser> authorizedUsers) {
+        this.authorizedUsers = authorizedUsers;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password_hash='" + password_hash + '\'' +
+                ", created=" + created +
+                ", authorizedUsers=" + authorizedUsers +
+                '}';
     }
 }

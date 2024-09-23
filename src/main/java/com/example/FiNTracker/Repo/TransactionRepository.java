@@ -1,5 +1,6 @@
 package com.example.FiNTracker.Repo;
 
+import com.example.FiNTracker.Entity.AuthorizedUserId;
 import com.example.FiNTracker.Entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -19,6 +20,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findAllByTransactionName(String transactionName);
 
     Transaction findByTransactionID(Long transactionID);
+
+    List<Transaction> findByAccountIdAndAuthorizedUserId(Long accountId, AuthorizedUserId authorizedUserId);
 
     // TODO Write queries to join au.user_id to t.user_id for various purposes
 

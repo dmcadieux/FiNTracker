@@ -13,6 +13,10 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long transaction_id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    private Account account;
+
     @Column(name = "category")
     private String category;
 
@@ -28,7 +32,8 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(String category, String transaction_name, Float amount, LocalDate date) {
+    public Transaction(Account account, String category, String transaction_name, Float amount, LocalDate date) {
+        this.account = account;
         this.category = category;
         this.transaction_name = transaction_name;
         this.amount = amount;
@@ -37,6 +42,14 @@ public class Transaction {
 
     public Long getTransaction_id() {
         return transaction_id;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public String getCategory() {
@@ -69,16 +82,5 @@ public class Transaction {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "transaction_id=" + transaction_id +
-                ", category='" + category + '\'' +
-                ", transaction_name='" + transaction_name + '\'' +
-                ", amount=" + amount +
-                ", date=" + date +
-                '}';
     }
 }

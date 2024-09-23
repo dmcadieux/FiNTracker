@@ -6,13 +6,18 @@ import jakarta.persistence.*;
 @Table(name = "authorized_users")
 public class AuthorizedUser {
 
-    @Id
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private Long user_id;
+    @EmbeddedId
+    private AuthorizedUserId id;
 
-    @Column(name = "account_id", nullable = false)
-    private Long account_id;
+    @ManyToOne
+    @MapsId("userId")
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @MapsId("accountId")
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @Column(name = "permission", length = 20, nullable = false)
     private String permission;
@@ -20,26 +25,35 @@ public class AuthorizedUser {
     public AuthorizedUser() {
     }
 
-    public AuthorizedUser(Long user_id, Long account_id, String permission) {
-        this.user_id = user_id;
-        this.account_id = account_id;
+    public AuthorizedUser(AuthorizedUserId id, User user, Account account, String permission) {
+        this.id = id;
+        this.user = user;
+        this.account = account;
         this.permission = permission;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public AuthorizedUserId getId() {
+        return id;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setId(AuthorizedUserId id) {
+        this.id = id;
     }
 
-    public Long getAccount_id() {
-        return account_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setAccount_id(Long account_id) {
-        this.account_id = account_id;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public String getPermission() {
@@ -53,8 +67,9 @@ public class AuthorizedUser {
     @Override
     public String toString() {
         return "AuthorizedUser{" +
-                "user_id=" + user_id +
-                ", account_id=" + account_id +
+                "id=" + id +
+                ", user=" + user +
+                ", account=" + account +
                 ", permission='" + permission + '\'' +
                 '}';
     }
