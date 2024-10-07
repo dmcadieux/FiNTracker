@@ -2,8 +2,6 @@ package com.example.FiNTracker.Service;
 
 import com.example.FiNTracker.Entity.Account;
 import com.example.FiNTracker.Repo.AccountRepository;
-import com.example.FiNTracker.Repo.AuthorizedUserRepository;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,7 +22,7 @@ public class AccountService {
     }
 
     public Account findByAccountID(Long accountID) {
-        return accountRepository.findByAccountID(accountID);
+        return accountRepository.findByAccountId(accountID);
     }
 
     public Account findByAccountName(String accountName) {
@@ -36,7 +34,7 @@ public class AccountService {
     }
 
     public List<Account> findAllByDateBetween(LocalDate startDate, LocalDate endDate) {
-        return accountRepository.findAllByDateBetween(startDate, endDate);
+        return accountRepository.findAllByCreatedBetween(startDate, endDate);
     }
 
 }

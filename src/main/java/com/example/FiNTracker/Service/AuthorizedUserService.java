@@ -20,15 +20,15 @@ public class AuthorizedUserService {
     }
 
     public List<AuthorizedUser> findAllByUserID(Long userID) {
-        return authorizedUserRepository.findAllByUserID(userID);
+        return authorizedUserRepository.findAllById_UserId(userID);
     }
 
     public List<AuthorizedUser> findAllByAccountID(Long accountID) {
-        return authorizedUserRepository.findAllByAccountID(accountID);
+        return authorizedUserRepository.findAllById_AccountId(accountID);
     }
 
     public AuthorizedUser findByUserIDAndAccountID(Long userID, Long accountID) {
-        return authorizedUserRepository.findByUserIDAndAccountID(userID, accountID);
+        return authorizedUserRepository.findById_UserIdAndId_AccountId(userID, accountID);
     }
 
 }

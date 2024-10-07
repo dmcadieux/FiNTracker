@@ -10,12 +10,12 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     List<Account> findAll();
 
-    Account findByAccountID(Long accountID);
+    Account findByAccountId(Long accountId);
 
     Account findByAccountName(String accountName);
 
     List<Account> findAllByOwnerId(Long ownerID);
 
-    List<Account> findAllByDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Account> findAllByCreatedBetween(LocalDate startDate, LocalDate endDate);
 
 }

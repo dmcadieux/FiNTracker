@@ -13,15 +13,15 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     List<Transaction> findByDateBetween(LocalDate startDate, LocalDate endDate);
 
-    List<Transaction> findAllByCategory(String transactionCategory);
+    List<Transaction> findAllByCategory(String category);
 
     List<Transaction> findAllByAmountBetween(Float amount1, Float amount2);
 
     List<Transaction> findAllByTransactionName(String transactionName);
 
-    Transaction findByTransactionID(Long transactionID);
+    Transaction findByTransactionId(Long transactionId);
 
-    List<Transaction> findByAccountIdAndAuthorizedUserId(Long accountId, AuthorizedUserId authorizedUserId);
+    List<Transaction> findAllByAccount_AuthorizedUsers_Id(AuthorizedUserId authorizedUserId);
 
     // TODO Write queries to join au.user_id to t.user_id for various purposes
 

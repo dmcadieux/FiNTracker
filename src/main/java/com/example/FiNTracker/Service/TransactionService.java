@@ -1,5 +1,6 @@
 package com.example.FiNTracker.Service;
 
+import com.example.FiNTracker.Entity.AuthorizedUserId;
 import com.example.FiNTracker.Entity.Transaction;
 import com.example.FiNTracker.Repo.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,14 @@ public class TransactionService {
         return transactionRepository.findAllByTransactionName(transactionName);
     }
 
-    public Transaction findByTransactionID(Long transactionID) {
-        return transactionRepository.findByTransactionID(transactionID);
+    public Transaction findByTransactionID(Long transactionId) {
+        return transactionRepository.findByTransactionId(transactionId);
     }
+
+    public List<Transaction> findAllByAccount_AuthorizedUsers_Id(AuthorizedUserId authorizedUserId) {
+        return transactionRepository.findAllByAccount_AuthorizedUsers_Id(authorizedUserId);
+    }
+
 
 
 }

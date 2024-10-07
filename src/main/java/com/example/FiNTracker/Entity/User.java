@@ -13,7 +13,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long user_id;
+    private Long userId;
 
     @Column(name = "username", length = 50, nullable = false, unique = true)
     private String username;
@@ -22,7 +22,7 @@ public class User {
     private String email;
 
     @Column(name = "password_hash", nullable = false)
-    private String password_hash;
+    private String passwordHash;
 
     @Column(name = "created", nullable = false)
     private LocalDate created;
@@ -33,16 +33,16 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password_hash, LocalDate created, Set<AuthorizedUser> authorizedUsers) {
+    public User(String username, String email, String passwordHash, LocalDate created, Set<AuthorizedUser> authorizedUsers) {
         this.username = username;
         this.email = email;
-        this.password_hash = password_hash;
+        this.passwordHash = passwordHash;
         this.created = created;
         this.authorizedUsers = authorizedUsers;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
     public String getUsername() {
@@ -61,12 +61,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword_hash() {
-        return password_hash;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword_hash(String password_hash) {
-        this.password_hash = password_hash;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public LocalDate getCreated() {
@@ -88,10 +88,10 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "user_id=" + user_id +
+                "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", password_hash='" + password_hash + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
                 ", created=" + created +
                 ", authorizedUsers=" + authorizedUsers +
                 '}';

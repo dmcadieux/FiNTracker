@@ -1,6 +1,7 @@
 package com.example.FiNTracker.Controller;
 
 
+import com.example.FiNTracker.Entity.AuthorizedUserId;
 import com.example.FiNTracker.Entity.Transaction;
 import com.example.FiNTracker.Service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,12 @@ public class TransactionController {
             @RequestParam String category
     ) {
         return transactionService.findAllTransactionsByCategory(category);
+    }
+
+    @GetMapping("get-transactions")
+    public List<Transaction> findAllByAccountIdAndAuthorizedUserId(
+            @RequestParam AuthorizedUserId authorizedUserId
+            ) {
+        return transactionService.findAllByAccount_AuthorizedUsers_Id(authorizedUserId);
     }
 }

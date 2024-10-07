@@ -11,16 +11,16 @@ public class Budget {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "user_id")
-    private Long user_id;
+    private Long userId;
 
     @Column(name = "account_id", nullable = false)
-    private Long account_id;
+    private Long accountId;
 
     @Column(name = "category")
     private String category;
 
     @Column(name = "budget_limit")
-    private Float budget_limit;
+    private Float budgetLimit;
 
     @Column(name = "created")
     private LocalDate date;
@@ -28,23 +28,23 @@ public class Budget {
     public Budget() {
     }
 
-    public Budget(Long account_id, String category, Float budget_limit, LocalDate date) {
-        this.account_id = account_id;
+    public Budget(Long accountId, String category, Float budgetLimit, LocalDate date) {
+        this.accountId = accountId;
         this.category = category;
-        this.budget_limit = budget_limit;
+        this.budgetLimit = budgetLimit;
         this.date = date;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public Long getAccount_id() {
-        return account_id;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setAccount_id(Long account_id) {
-        this.account_id = account_id;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public String getCategory() {
@@ -55,12 +55,12 @@ public class Budget {
         this.category = category;
     }
 
-    public Float getBudget_limit() {
-        return budget_limit;
+    public Float getBudgetLimit() {
+        return budgetLimit;
     }
 
-    public void setBudget_limit(Float budget_limit) {
-        this.budget_limit = budget_limit;
+    public void setBudgetLimit(Float budgetLimit) {
+        this.budgetLimit = budgetLimit;
     }
 
     public LocalDate getDate() {
@@ -74,10 +74,10 @@ public class Budget {
     @Override
     public String toString() {
         return "Budget{" +
-                "user_id=" + user_id +
-                ", account_id=" + account_id +
+                "userId=" + userId +
+                ", accountId=" + accountId +
                 ", category='" + category + '\'' +
-                ", budget_limit=" + budget_limit +
+                ", budgetLimit=" + budgetLimit +
                 ", date=" + date +
                 '}';
     }

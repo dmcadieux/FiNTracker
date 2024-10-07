@@ -11,7 +11,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transaction_id")
-    private Long transaction_id;
+    private Long transactionId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
@@ -21,7 +21,7 @@ public class Transaction {
     private String category;
 
     @Column(name = "transaction_name")
-    private String transaction_name;
+    private String transactionName;
 
     @Column(name = "amount")
     private Float amount;
@@ -32,16 +32,16 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(Account account, String category, String transaction_name, Float amount, LocalDate date) {
+    public Transaction(Account account, String category, String transactionName, Float amount, LocalDate date) {
         this.account = account;
         this.category = category;
-        this.transaction_name = transaction_name;
+        this.transactionName = transactionName;
         this.amount = amount;
         this.date = date;
     }
 
     public Long getTransaction_id() {
-        return transaction_id;
+        return transactionId;
     }
 
     public Account getAccount() {
@@ -60,12 +60,12 @@ public class Transaction {
         this.category = category;
     }
 
-    public String getTransaction_name() {
-        return transaction_name;
+    public String getTransactionName() {
+        return transactionName;
     }
 
     public void setTransaction_name(String transaction_name) {
-        this.transaction_name = transaction_name;
+        this.transactionName = transaction_name;
     }
 
     public Float getAmount() {
@@ -82,5 +82,17 @@ public class Transaction {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "transactionId=" + transactionId +
+                ", account=" + account +
+                ", category='" + category + '\'' +
+                ", transactionName='" + transactionName + '\'' +
+                ", amount=" + amount +
+                ", date=" + date +
+                '}';
     }
 }

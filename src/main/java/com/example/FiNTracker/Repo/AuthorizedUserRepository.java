@@ -9,11 +9,11 @@ public interface AuthorizedUserRepository extends JpaRepository<AuthorizedUser, 
 
     List<AuthorizedUser> findAll();
 
-    List<AuthorizedUser> findAllByUserID(Long userID);
+    List<AuthorizedUser> findAllById_UserId(Long userId);
 
-    List<AuthorizedUser> findAllByAccountID(Long accountID);
+    List<AuthorizedUser> findAllById_AccountId(Long accountId);
 
-    AuthorizedUser findByUserIDAndAccountID(Long userID, Long accountID);
+    AuthorizedUser findById_UserIdAndId_AccountId(Long userId, Long accountId);
 
 
 }
