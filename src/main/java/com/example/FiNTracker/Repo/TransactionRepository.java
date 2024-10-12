@@ -3,6 +3,8 @@ package com.example.FiNTracker.Repo;
 import com.example.FiNTracker.Entity.AuthorizedUserId;
 import com.example.FiNTracker.Entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,7 +23,12 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     Transaction findByTransactionId(Long transactionId);
 
-    List<Transaction> findAllByAccount_AuthorizedUsers_Id(AuthorizedUserId authorizedUserId);
+    @Query("SELECT t from Transaction t " +
+            "JOIN AuthorizedUser au ON t.account = au.account " +
+            "WHERE au.id = :authorizedUserId")
+    List<Transaction> findAllTransactionsByAuthorizedUserId(
+            @Param("authorizedUserId") AuthorizedUserId authorizedUserId
+            );
 
     // TODO Write queries to join au.user_id to t.user_id for various purposes
 

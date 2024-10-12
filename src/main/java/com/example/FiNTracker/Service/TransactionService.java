@@ -1,5 +1,6 @@
 package com.example.FiNTracker.Service;
 
+import com.example.FiNTracker.Entity.AuthorizedUser;
 import com.example.FiNTracker.Entity.AuthorizedUserId;
 import com.example.FiNTracker.Entity.Transaction;
 import com.example.FiNTracker.Repo.TransactionRepository;
@@ -43,8 +44,11 @@ public class TransactionService {
         return transactionRepository.findByTransactionId(transactionId);
     }
 
-    public List<Transaction> findAllByAccount_AuthorizedUsers_Id(AuthorizedUserId authorizedUserId) {
-        return transactionRepository.findAllByAccount_AuthorizedUsers_Id(authorizedUserId);
+    public List<Transaction> getTransactionsForAuthorizedUser(Long userId, Long accountId) {
+        AuthorizedUserId authorizedUserId = new AuthorizedUserId();
+        authorizedUserId.setUserId(userId);
+        authorizedUserId.setAccountId(accountId);
+        return transactionRepository.findAllTransactionsByAuthorizedUserId(authorizedUserId);
     }
 
 

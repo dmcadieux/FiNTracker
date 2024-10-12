@@ -6,6 +6,7 @@ import com.example.FiNTracker.Entity.Transaction;
 import com.example.FiNTracker.Service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,17 +37,19 @@ public class TransactionController {
         return transactionService.findAllTransactionsBetweenDates(startDate, endDate);
     }
 
-    @GetMapping("category")
+    @GetMapping("/category")
     public List<Transaction> getAllEntriesByCategory(
             @RequestParam String category
     ) {
         return transactionService.findAllTransactionsByCategory(category);
     }
 
-    @GetMapping("get-transactions")
-    public List<Transaction> findAllByAccountIdAndAuthorizedUserId(
-            @RequestParam AuthorizedUserId authorizedUserId
+    @GetMapping("/authorized")
+    public ResponseEntity<List<Transaction>> getTransactionsForAuthorizedUser(
+            @RequestParam Long userId,
+            @RequestParam Long accountId
             ) {
-        return transactionService.findAllByAccount_AuthorizedUsers_Id(authorizedUserId);
+        List<Transaction> transactions = transactionService.getTransactionsForAuthorizedUser(userId, accountId);
+        return ResponseEntity.ok(transactions);
     }
 }
