@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,12 +45,15 @@ public class TransactionController {
         return transactionService.findAllTransactionsByCategory(category);
     }
 
-    @GetMapping("/authorized")
-    public ResponseEntity<List<Transaction>> getTransactionsForAuthorizedUser(
-            @RequestParam Long userId,
-            @RequestParam Long accountId
-            ) {
-        List<Transaction> transactions = transactionService.getTransactionsForAuthorizedUser(userId, accountId);
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Transaction>> getTransactionsForUser(@PathVariable Long userId) {
+        List<Transaction> transactions = transactionService.getTransactionsForUser(userId);
+        return ResponseEntity.ok(transactions);
+    }
+
+    @GetMapping("/account/{accountId}")
+    public ResponseEntity<List<Transaction>> getTransactionsForAccount(@PathVariable Long accountId) {
+        List<Transaction> transactions = transactionService.getTransactionsForAccount(accountId);
         return ResponseEntity.ok(transactions);
     }
 }

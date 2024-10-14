@@ -13,9 +13,8 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long transactionId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @Column(name = "account_id", nullable = false)
+    private Long accountId;
 
     @Column(name = "category")
     private String category;
@@ -32,24 +31,28 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(Account account, String category, String transactionName, Float amount, LocalDate date) {
-        this.account = account;
+    public Transaction(Long accountId, String category, String transactionName, Float amount, LocalDate date) {
+        this.accountId = accountId;
         this.category = category;
         this.transactionName = transactionName;
         this.amount = amount;
         this.date = date;
     }
 
-    public Long getTransaction_id() {
+    public Long getTransactionId() {
         return transactionId;
     }
 
-    public Account getAccount() {
-        return account;
+    public void setTransactionId(Long transactionId) {
+        this.transactionId = transactionId;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public String getCategory() {
@@ -64,8 +67,8 @@ public class Transaction {
         return transactionName;
     }
 
-    public void setTransaction_name(String transaction_name) {
-        this.transactionName = transaction_name;
+    public void setTransactionName(String transactionName) {
+        this.transactionName = transactionName;
     }
 
     public Float getAmount() {
@@ -88,7 +91,7 @@ public class Transaction {
     public String toString() {
         return "Transaction{" +
                 "transactionId=" + transactionId +
-                ", account=" + account +
+                ", accountId=" + accountId +
                 ", category='" + category + '\'' +
                 ", transactionName='" + transactionName + '\'' +
                 ", amount=" + amount +

@@ -23,12 +23,16 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     Transaction findByTransactionId(Long transactionId);
 
-    @Query("SELECT t from Transaction t " +
-            "JOIN AuthorizedUser au ON t.account = au.account " +
-            "WHERE au.id = :authorizedUserId")
-    List<Transaction> findAllTransactionsByAuthorizedUserId(
-            @Param("authorizedUserId") AuthorizedUserId authorizedUserId
-            );
+    // Returns all transactions for all accounts that the user has access to
+    @Query("SELECT DISTINCT t FROM Transaction t " +
+            "JOIN AuthorizedUser au ON t.accountId = au.id.accountId " +
+            "WHERE au.id.userId = :userId")
+    List<Transaction> findDistinctTransactionByUserId(@Param("userId") Long userId);
+
+    @Query("SELECT DISTINCT t FROM Transaction t " +
+            "JOIN AuthorizedUser au ON t.accountId = au.id.accountId " +
+            "WHERE au.id.accountId = :accountId")
+    List<Transaction> findDistinctTransactionByAccountId(@Param("accountId") Long accountId);
 
     // TODO Write queries to join au.user_id to t.user_id for various purposes
 

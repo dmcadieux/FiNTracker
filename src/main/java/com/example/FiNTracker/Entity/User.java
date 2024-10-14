@@ -27,22 +27,22 @@ public class User {
     @Column(name = "created", nullable = false)
     private LocalDate created;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AuthorizedUser> authorizedUsers = new HashSet<>();
-
     public User() {
     }
 
-    public User(String username, String email, String passwordHash, LocalDate created, Set<AuthorizedUser> authorizedUsers) {
+    public User(String username, String email, String passwordHash, LocalDate created) {
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
         this.created = created;
-        this.authorizedUsers = authorizedUsers;
     }
 
     public Long getUserId() {
         return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -75,25 +75,5 @@ public class User {
 
     public void setCreated(LocalDate created) {
         this.created = created;
-    }
-
-    public Set<AuthorizedUser> getAuthorizedUsers() {
-        return authorizedUsers;
-    }
-
-    public void setAuthorizedUsers(Set<AuthorizedUser> authorizedUsers) {
-        this.authorizedUsers = authorizedUsers;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", passwordHash='" + passwordHash + '\'' +
-                ", created=" + created +
-                ", authorizedUsers=" + authorizedUsers +
-                '}';
     }
 }

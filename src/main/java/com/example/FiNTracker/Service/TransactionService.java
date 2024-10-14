@@ -44,11 +44,12 @@ public class TransactionService {
         return transactionRepository.findByTransactionId(transactionId);
     }
 
-    public List<Transaction> getTransactionsForAuthorizedUser(Long userId, Long accountId) {
-        AuthorizedUserId authorizedUserId = new AuthorizedUserId();
-        authorizedUserId.setUserId(userId);
-        authorizedUserId.setAccountId(accountId);
-        return transactionRepository.findAllTransactionsByAuthorizedUserId(authorizedUserId);
+    public List<Transaction> getTransactionsForUser(Long userId) {
+        return transactionRepository.findDistinctTransactionByUserId(userId);
+    }
+
+    public List<Transaction> getTransactionsForAccount(Long accountId) {
+        return transactionRepository.findDistinctTransactionByAccountId(accountId);
     }
 
 
