@@ -1,7 +1,5 @@
 package com.example.FiNTracker.Service;
 
-import com.example.FiNTracker.Entity.AuthorizedUser;
-import com.example.FiNTracker.Entity.AuthorizedUserId;
 import com.example.FiNTracker.Entity.Transaction;
 import com.example.FiNTracker.Repo.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +22,8 @@ public class TransactionService {
         return transactionRepository.findAll();
     }
 
-    public List<Transaction> findAllTransactionsBetweenDates(LocalDate startDate, LocalDate endDate) {
-        return transactionRepository.findByDateBetween(startDate, endDate);
+    public List<Transaction> findAllTransactionsBetweenDates(LocalDate startDate, LocalDate endDate, Long accountId) {
+        return transactionRepository.findByDateBetweenAndAccountId(startDate, endDate, accountId);
     }
 
     public List<Transaction> findAllTransactionsByCategory(String category) {
@@ -50,6 +48,15 @@ public class TransactionService {
 
     public List<Transaction> getTransactionsForAccount(Long accountId) {
         return transactionRepository.findDistinctTransactionByAccountId(accountId);
+    }
+
+    public List<Transaction> getTransactionsByMonth(int year, int month, Long accountId) {
+
+        LocalDate startDate = LocalDate.of(year, month, 1);
+        LocalDate endDate = startDate.plusMonths(1);
+
+        return transactionRepository.findByDateBetweenAndAccountId(startDate, endDate, accountId);
+
     }
 
 

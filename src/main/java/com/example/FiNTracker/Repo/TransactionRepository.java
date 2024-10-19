@@ -1,6 +1,5 @@
 package com.example.FiNTracker.Repo;
 
-import com.example.FiNTracker.Entity.AuthorizedUserId;
 import com.example.FiNTracker.Entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +12,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     List<Transaction> findAll();
 
-    List<Transaction> findByDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Transaction> findByDateBetweenAndAccountId(LocalDate startDate, LocalDate endDate, Long accountId);
 
     List<Transaction> findAllByCategory(String category);
 
@@ -29,12 +28,13 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             "WHERE au.id.userId = :userId")
     List<Transaction> findDistinctTransactionByUserId(@Param("userId") Long userId);
 
+    // Finds all transactions for a particular account
     @Query("SELECT DISTINCT t FROM Transaction t " +
             "JOIN AuthorizedUser au ON t.accountId = au.id.accountId " +
             "WHERE au.id.accountId = :accountId")
     List<Transaction> findDistinctTransactionByAccountId(@Param("accountId") Long accountId);
 
-    // TODO Write queries to join au.user_id to t.user_id for various purposes
 
-    //TODO Write query to return all transactions by month
+
+    // TODO Fix date so it doesn't return null
 }

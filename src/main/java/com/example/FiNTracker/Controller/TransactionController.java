@@ -33,9 +33,10 @@ public class TransactionController {
     @GetMapping("/date-range")
     public List<Transaction> getAllFinancialEntriesBetweenDates(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam long accountId
     ) {
-        return transactionService.findAllTransactionsBetweenDates(startDate, endDate);
+        return transactionService.findAllTransactionsBetweenDates(startDate, endDate, accountId);
     }
 
     @GetMapping("/category")
@@ -54,6 +55,15 @@ public class TransactionController {
     @GetMapping("/account/{accountId}")
     public ResponseEntity<List<Transaction>> getTransactionsForAccount(@PathVariable Long accountId) {
         List<Transaction> transactions = transactionService.getTransactionsForAccount(accountId);
+        return ResponseEntity.ok(transactions);
+    }
+
+    @GetMapping("/transactions/{year}/{month}/{accountId}")
+    public ResponseEntity<List<Transaction>> getTransactionsByMonth(
+            @PathVariable int year,
+            @PathVariable int month,
+            @PathVariable long accountId) {
+        List<Transaction> transactions = transactionService.getTransactionsByMonth(year, month, accountId);
         return ResponseEntity.ok(transactions);
     }
 }

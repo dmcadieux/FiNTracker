@@ -73,13 +73,13 @@ VALUES
     (1, 3, 'write');
 
 -- Transactions
-INSERT INTO transactions (account_id, category, transaction_name, amount)
+INSERT INTO transactions (account_id, category, transaction_name, amount, transaction_date)
 VALUES
-    (1, 'fun', 'microwave brownies', 10.20),
-    (1, 'fun', 'grey goose', 99.99),
-    (2, 'groceries', 'grand union order', 20.20),
-    (3, 'subscriptions', 'netflix', 11.99),
-    (3, 'restaurants', 'mcdonalds', 12.23);
+    (1, 'fun', 'microwave brownies', 10.20, '2024-02-10'),
+    (1, 'fun', 'grey goose', 99.99, '2023-09-09'),
+    (2, 'groceries', 'grand union order', 20.20, '2023-12-27'),
+    (3, 'subscriptions', 'netflix', 11.99, '2024-10-07'),
+    (3, 'restaurants', 'mcdonalds', 12.23, '1999-03-09');
 
 -- Budgets
 INSERT INTO budgets (category, budget_limit)

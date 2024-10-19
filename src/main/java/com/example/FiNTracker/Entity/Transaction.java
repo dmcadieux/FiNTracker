@@ -25,7 +25,7 @@ public class Transaction {
     @Column(name = "amount")
     private Float amount;
 
-    @Column(name = "date")
+    @Column(name = "transaction_date")
     private LocalDate date;
 
     public Transaction() {
@@ -85,17 +85,5 @@ public class Transaction {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "transactionId=" + transactionId +
-                ", accountId=" + accountId +
-                ", category='" + category + '\'' +
-                ", transactionName='" + transactionName + '\'' +
-                ", amount=" + amount +
-                ", date=" + date +
-                '}';
     }
 }
