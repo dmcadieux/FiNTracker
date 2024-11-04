@@ -2,6 +2,7 @@ package com.example.FiNTracker.Entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -23,7 +24,7 @@ public class Transaction {
     private String transactionName;
 
     @Column(name = "amount")
-    private Float amount;
+    private BigDecimal amount;
 
     @Column(name = "transaction_date")
     private LocalDate date;
@@ -31,7 +32,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(Long accountId, String category, String transactionName, Float amount, LocalDate date) {
+    public Transaction(Long accountId, String category, String transactionName, BigDecimal amount, LocalDate date) {
         this.accountId = accountId;
         this.category = category;
         this.transactionName = transactionName;
@@ -71,11 +72,11 @@ public class Transaction {
         this.transactionName = transactionName;
     }
 
-    public Float getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Float amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -85,5 +86,17 @@ public class Transaction {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "transactionId=" + transactionId +
+                ", accountId=" + accountId +
+                ", category='" + category + '\'' +
+                ", transactionName='" + transactionName + '\'' +
+                ", amount=" + amount +
+                ", date=" + date +
+                '}';
     }
 }

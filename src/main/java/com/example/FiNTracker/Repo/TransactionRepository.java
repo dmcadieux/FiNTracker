@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,6 +34,12 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             "JOIN AuthorizedUser au ON t.accountId = au.id.accountId " +
             "WHERE au.id.accountId = :accountId")
     List<Transaction> findDistinctTransactionByAccountId(@Param("accountId") Long accountId);
+
+    @Query("SELECT t.category, SUM(t.amount) " +
+            "FROM Transaction t " +
+            "WHERE t.category = :category AND t.accountId = :accountId " +
+            "GROUP BY t.category")
+    List<Object[]> sumAmountByCategory(@Param("category") String category, @Param("accountId") Long accountId);
 
 
 

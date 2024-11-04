@@ -5,6 +5,7 @@ import com.example.FiNTracker.Repo.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -57,6 +58,10 @@ public class TransactionService {
 
         return transactionRepository.findByDateBetweenAndAccountId(startDate, endDate, accountId);
 
+    }
+
+    public List<Object[]> sumTransactionAmountByCategory(String category, Long accountId) {
+        return transactionRepository.sumAmountByCategory(category, accountId);
     }
 
 

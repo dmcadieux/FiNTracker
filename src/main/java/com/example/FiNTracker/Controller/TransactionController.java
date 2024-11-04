@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -66,4 +67,13 @@ public class TransactionController {
         List<Transaction> transactions = transactionService.getTransactionsByMonth(year, month, accountId);
         return ResponseEntity.ok(transactions);
     }
+
+    @GetMapping("sum/{accountId}/{category}")
+    public ResponseEntity<List<Object[]>> getSumByCategory(
+            @PathVariable String category,
+            @PathVariable long accountId) {
+        List<Object[]> categoryTotal = transactionService.sumTransactionAmountByCategory(category, accountId);
+        return ResponseEntity.ok(categoryTotal);
+    }
+
 }
